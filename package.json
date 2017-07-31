@@ -101,7 +101,7 @@
     "test": "npm run lint && npm run test:ava",
     "test:ava": "cross-env NODE_ENV=test ava",
     "test:watch": "cross-env NODE_ENV=test ava --watch",
-    "start": "bin/styleguidist.js server --config examples/basic/styleguide.config.js",
+    "start": "bin/styleguidist.js server --config examples/pages/styleguide.config.js",
     "start:customised": "bin/styleguidist.js server --config examples/customised/styleguide.config.js",
     "start:sections": "bin/styleguidist.js server --config examples/sections/styleguide.config.js",
     "start:express": "bin/styleguidist.js server --config examples/express/styleguide.config.js",

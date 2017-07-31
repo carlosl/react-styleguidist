@@ -59,6 +59,14 @@ export function processSections(sections) {
 	});
 }
 
+export function processPages(pages) {
+	return pages.map(page => {
+		page.components = processComponents(page.components || []);
+		page.sections = processSections(page.sections || []);
+		return page;
+	});
+}
+
 /**
  * Fuzzy filters components list by component name.
  *

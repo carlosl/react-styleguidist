@@ -105,6 +105,14 @@ function mapSectionsToSectionsWithComponentFiles(sections, config) {
 	return sections.map(section => expandSectionComponents(section, config));
 }
 
+function mapPageToSectionsWithComponentFiles(pages, config) {
+	if (!pages) {
+		return {};
+	}
+
+	return pages.map(page => expandPageSections(page, config));
+}
+
 /**
  * Returns section with additional componentFiles property
  *
@@ -119,6 +127,17 @@ function expandSectionComponents(section, config) {
 		{
 			componentFiles: getComponentFiles(section.components, config),
 			sections: mapSectionsToSectionsWithComponentFiles(section.sections, config),
+		}
+	);
+}
+
+function expandPageSections(page, config) {
+	return Object.assign(
+		{},
+		page,
+		{
+			componentFiles: getComponentFiles(page.components, config),
+			sectionFiles: mapSectionsToSectionsWithComponentFiles(page.sections, config),
 		}
 	);
 }
@@ -160,6 +179,15 @@ function processSection(section, config) {
 	});
 }
 
+function processPage(page, config) {
+	return toCode({
+		id: JSON.stringify(page.id),
+		name: JSON.stringify(page.title),
+		components: processComponentsSource(page.componentFiles, config),
+		sections: processSectionsList(page.sectionFiles, config),
+	});
+}
+
 /**
  * Return JS code as a string for one level of sections.
  *
@@ -173,6 +201,14 @@ function processSectionsList(sections, config) {
 	}
 
 	return toCode(sections.map(section => processSection(section, config)));
+}
+
+function processPagesList(pages, config) {
+	if (!pages) {
+		return null;
+	}
+
+	return toCode(pages.map(page => processPage(page, config)));
 }
 
 /**
@@ -213,6 +249,8 @@ module.exports.pitch = function() {
 	const componentFiles = getComponentFiles(config.components, config);
 	const sectionsWithFiles =
 		mapSectionsToSectionsWithComponentFiles(config.sections, config);
+	const pagesWithFiles =
+		mapPageToSectionsWithComponentFiles(config.pages, config);
 
 	if (config.contextDependencies) {
 		config.contextDependencies.forEach(d => this.addContextDependency(d));
@@ -231,6 +269,7 @@ module.exports.pitch = function() {
 		config: JSON.stringify(simplifiedConfig),
 		components: processComponentsSource(componentFiles, config),
 		sections: processSectionsList(sectionsWithFiles, config),
+		pages: processPagesList(pagesWithFiles, config),
 	});
 	return `module.exports = ${code};`;
 };

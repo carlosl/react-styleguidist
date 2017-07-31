@@ -6,6 +6,10 @@
 	padding-left: 200px;
 }
 
+.root.hasNav {
+	padding-top: 20px;
+}
+
 .content {
 	max-width: 1000px;
 	padding: 15px 30px;
@@ -21,6 +25,10 @@
 	bottom: 0;
 	width: 200px;
 	overflow: auto;
+}
+
+.root.hasNav .sidebar {
+	top: 30px;
 }
 
 .components {

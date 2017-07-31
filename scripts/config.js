@@ -20,6 +20,7 @@ const CONFIG_FILENAME = 'styleguide.config.js';
 const DEFAULT_CONFIG = {
 	components: null,
 	sections: null,
+	pages: null,
 	skipComponentsWithoutExample: false,
 	defaultExample: false,
 	showCode: false,
@@ -63,7 +64,7 @@ function getConfig(options) {
 
 	let configFilepath;
 	let config;
-	if (options.components || options.sections) {
+	if (options.components || options.sections || options.pages) {
 		// Config options was passed to a function
 		config = options;
 	}
@@ -154,8 +155,11 @@ function findConfig(file) {
  * @param {Object} config Config options.
  */
 function validateConfig(config) {
-	if (!config.components && !config.sections) {
-		throw new StyleguidistError('Styleguidist: "components" or "sections" option is required.');
+	if (!config.components && !config.sections && !config.pages) {
+		throw new StyleguidistError('Styleguidist: "components" or "sections" or "pages" option is required.');
+	}
+	if (config.pages && !Array.isArray(config.pages)) {
+		throw new StyleguidistError('Styleguidist: "pages" option must be an array.');
 	}
 	if (config.sections && !Array.isArray(config.sections)) {
 		throw new StyleguidistError('Styleguidist: "sections" option must be an array.');

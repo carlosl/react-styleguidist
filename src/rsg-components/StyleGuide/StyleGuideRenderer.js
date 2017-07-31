@@ -4,8 +4,8 @@ import cx from 'classnames';
 
 const s = require('./StyleGuide.css');
 
-const StyleGuideRenderer = ({ title, homepageUrl, components, toc, sidebar }) => (
-	<div className={cx(s.root, sidebar && s.hasSidebar)}>
+const StyleGuideRenderer = ({ title, homepageUrl, components, toc, sidebar, nav }) => (
+	<div className={cx(s.root, sidebar && s.hasSidebar, nav && s.hasNav)}>
 		<main className={s.content}>
 			<div className={s.components}>
 				{components}
@@ -29,6 +29,7 @@ StyleGuideRenderer.propTypes = {
 	components: PropTypes.object.isRequired,
 	toc: PropTypes.node.isRequired,
 	sidebar: PropTypes.bool,
+	nav: PropTypes.bool
 };
 
 export default StyleGuideRenderer;

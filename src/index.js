@@ -11,6 +11,7 @@ import {
 	processSections,
 } from './utils/utils';
 import StyleGuide from 'rsg-components/StyleGuide';
+import Pages from 'rsg-components/Pages';
 
 import 'highlight.js/styles/tomorrow.css';
 import './styles.css';
@@ -26,9 +27,26 @@ let codeKey = 0;
 
 function renderStyleguide() {
 	const styleguide = require('styleguide!index.js');
+	const hash = document.location.hash.replace('#!/', '');
+	const x = 0;
+	let components_raw = styleguide.components;
+	let sections_raw = styleguide.sections;
 
-	let components = processComponents(styleguide.components);
-	let sections = processSections(styleguide.sections || []);
+	if (styleguide.pages.length > 0) {
+		let selected = 0;
+
+		styleguide.pages.map((page, i) => {
+			if (page.id === hash) {
+				selected = i;
+			}
+		});
+
+		components_raw = styleguide.pages[selected].components;
+		sections_raw = styleguide.pages[selected].sections;
+	}
+
+	let components = processComponents(components_raw);
+	let sections = processSections(sections_raw || []);
 	let sidebar = true;
 	let singleExample = false;
 
@@ -56,7 +74,7 @@ function renderStyleguide() {
 		}
 	}
 
-	ReactDOM.render(
+	/* ReactDOM.render(
 		<StyleGuide
 			codeKey={codeKey}
 			config={styleguide.config}
@@ -64,6 +82,15 @@ function renderStyleguide() {
 			sections={sections}
 			sidebar={sidebar}
 			singleExample={singleExample}
+		/>,
+		document.getElementById('app')
+	); */
+
+	ReactDOM.render(
+		<Pages
+			pages={styleguide.pages}
+			config={styleguide.config}
+			hash={hash}
 		/>,
 		document.getElementById('app')
 	);

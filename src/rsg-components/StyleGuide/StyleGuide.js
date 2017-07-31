@@ -55,7 +55,7 @@ export default class StyleGuide extends Component {
 	}
 
 	render() {
-		let { config, components, sections, sidebar, singleExample } = this.props;
+		let { config, components, sections, sidebar, nav, singleExample } = this.props;
 
 		return (
 			<StyleGuideRenderer
@@ -64,7 +64,8 @@ export default class StyleGuide extends Component {
 				components={this.renderComponents(components, sections, sidebar, singleExample)}
 				sections={sections}
 				toc={this.renderTableOfContents(components, sections)}
-				sidebar={(isEmpty(components) && isEmpty(sections)) ? false : sidebar}
+				sidebar={(isEmpty(components) && (isEmpty(sections) || sections.length === 0)) ? false : sidebar}
+				nav={nav || false}
 			/>
 		);
 	}
