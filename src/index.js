@@ -27,7 +27,7 @@ let codeKey = 0;
 
 function renderStyleguide() {
 	const styleguide = require('styleguide!index.js');
-	const hash = document.location.hash.replace('#!/', '');
+	const hash = document.location.hash.replace('#!', '');
 	const x = 0;
 	let components_raw = styleguide.components;
 	let sections_raw = styleguide.sections;
@@ -96,7 +96,15 @@ function renderStyleguide() {
 	);
 }
 
-window.addEventListener('hashchange', renderStyleguide);
+window.addEventListener('hashchange', ()=>
+	{
+		if(document.location.hash.substr(0,2) === '#!' )
+			{
+				renderStyleguide();
+			}
+
+	}
+);
 
 if (module.hot) {
 	module.hot.accept('styleguide!index.js', () => {

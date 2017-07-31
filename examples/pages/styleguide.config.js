@@ -25,14 +25,24 @@ module.exports = {
 					name: 'Documentation',
 					sections: [
 						{
-							name: 'First File',
-							content: 'docs/One.md',
-						},
-						{
 							name: 'Second File',
 							content: 'docs/Two.md',
 						},
+						{
+							name: 'First File',
+							content: 'docs/One.md',
+						},
 					],
+				},
+			],
+		},
+		{
+			id: 'Button',
+			title: 'Button',
+			sections: [
+				{
+					name: 'Buttons',
+					components: './lib/components/Button/**/[A-Z]*.js',
 				},
 			],
 		},
