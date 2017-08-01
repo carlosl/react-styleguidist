@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { filterComponentsByName, getFilterRegExp } from '../../utils/utils';
 import ComponentsList from 'rsg-components/ComponentsList';
 import TableOfContentsRenderer from 'rsg-components/TableOfContents/TableOfContentsRenderer';
+import Pages from 'rsg-components/Pages';
 
 export default class TableOfContents extends Component {
 	static propTypes = {
@@ -21,10 +22,11 @@ export default class TableOfContents extends Component {
 		return filterComponentsByName(components || [], searchTerm);
 	}
 
-	getSections(sections, searchTerm) {
+	getSections(Pages, searchTerm) {
+		console.log(Pages)
 		const regExp = getFilterRegExp(searchTerm);
-		sections = sections || [];
-		return sections.reduce((filteredSections, { name, components: subComponents = [], sections: subSections }) => {
+		Pages = Pages || [];
+		return Pages.reduce((filteredSections, { name, components: subComponents = [], Pages: subSections }) => {
 			subComponents = this.getComponents(subComponents, searchTerm);
 			if (subComponents.length || !searchTerm || regExp.test(name)) {
 				filteredSections.push({
@@ -37,10 +39,10 @@ export default class TableOfContents extends Component {
 		}, []);
 	}
 
-	renderLevel(components, sections, searchTerm) {
+	renderLevel(components, Pages, searchTerm) {
 		const items = [
 			...this.getComponents(components, searchTerm),
-			...this.getSections(sections, searchTerm),
+			...this.getSections(Pages, searchTerm),
 		];
 		return (
 			<ComponentsList items={items} />
@@ -49,11 +51,12 @@ export default class TableOfContents extends Component {
 
 	render() {
 		const { searchTerm } = this.state;
-		const { components, sections } = this.props;
+		const { components, Pages } = this.props;
+
 		return (
 			<TableOfContentsRenderer
 				searchTerm={searchTerm}
-				items={this.renderLevel(components, sections, searchTerm)}
+				items={this.renderLevel(components, Pages, searchTerm)}
 				onSearchTermChange={searchTerm => this.setState({ searchTerm })}
 			/>
 		);

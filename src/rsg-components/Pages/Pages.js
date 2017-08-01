@@ -69,7 +69,7 @@ export default function Pages({ config, pages, hash }) {
 			singleExample = true;
 		}
 	} */
-
+	alert(Object.keys(pages[0]));
 	return (
 		<Nav pages={pages}>
 			<StyleGuide
