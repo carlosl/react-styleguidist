@@ -4,7 +4,27 @@ import cx from 'classnames';
 
 const s = require('./StyleGuide.css');
 
-const StyleGuideRenderer = ({ title, homepageUrl, components, toc, sidebar, nav }) => (
+function Nav(props) {
+	const { pages, children } = props;
+
+	const navLinksJsx = pages.map((page, i) => {
+		return (<li key={i}><a href={`#!${page.id}`}>{page.name}</a></li>);
+	});
+
+	return (
+		<div>
+			<nav><ul>{navLinksJsx}</ul></nav>
+			{children}
+		</div>
+	);
+}
+
+Nav.propTypes = {
+	pages: PropTypes.array.isRequired,
+	children: PropTypes.node,
+};
+
+const StyleGuideRenderer = ({ title, homepageUrl, components, toc, pages, sidebar, nav }) => (
 	<div className={cx(s.root, sidebar && s.hasSidebar, nav && s.hasNav)}>
 		<main className={s.content}>
 			<div className={s.components}>
@@ -17,7 +37,9 @@ const StyleGuideRenderer = ({ title, homepageUrl, components, toc, sidebar, nav 
 		{sidebar &&
 			<div className={s.sidebar}>
 				<h1 className={s.heading}>{title}</h1>
-				{toc}
+				<Nav pages={pages}></Nav>
+				{/* {toc} */}
+
 			</div>
 		}
 	</div>

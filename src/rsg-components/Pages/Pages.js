@@ -11,25 +11,7 @@ import {
 } from '../../utils/utils';
 import StyleGuide from 'rsg-components/StyleGuide';
 
-function Nav(props) {
-	const { pages, children } = props;
 
-	const navLinksJsx = pages.map((page, i) => {
-		return (<li key={i}><a href={`#!${page.id}`}>{page.name}</a></li>);
-	});
-
-	return (
-		<div>
-			<nav><ul>{navLinksJsx}</ul></nav>
-			{children}
-		</div>
-	);
-}
-
-Nav.propTypes = {
-	pages: PropTypes.array.isRequired,
-	children: PropTypes.node,
-};
 
 export default function Pages({ config, pages, hash }) {
 	let selected = 0;
@@ -69,19 +51,17 @@ export default function Pages({ config, pages, hash }) {
 			singleExample = true;
 		}
 	} */
-	alert(Object.keys(pages[0]));
 	return (
-		<Nav pages={pages}>
 			<StyleGuide
 				codeKey={codeKey}
 				config={config}
 				components={components}
 				sections={sections}
+				pages={pages}
 				sidebar={sidebar}
 				nav={pages && pages.length > 0}
 				singleExample={singleExample}
 			/>
-		</Nav>
 	);
 }
 

@@ -11,6 +11,7 @@ export default class StyleGuide extends Component {
 		config: PropTypes.object.isRequired,
 		components: PropTypes.array.isRequired,
 		sections: PropTypes.array.isRequired,
+		pages: PropTypes.array,
 		sidebar: PropTypes.bool,
 		singleExample: PropTypes.bool,
 	};
@@ -55,7 +56,7 @@ export default class StyleGuide extends Component {
 	}
 
 	render() {
-		let { config, components, sections, sidebar, nav, singleExample } = this.props;
+		let { config, components, sections, pages, sidebar, nav, singleExample } = this.props;
 
 		return (
 			<StyleGuideRenderer
@@ -63,6 +64,7 @@ export default class StyleGuide extends Component {
 				homepageUrl={HOMEPAGE}
 				components={this.renderComponents(components, sections, sidebar, singleExample)}
 				sections={sections}
+				pages={pages}
 				toc={this.renderTableOfContents(components, sections)}
 				sidebar={(isEmpty(components) && (isEmpty(sections) || sections.length === 0)) ? false : sidebar}
 				nav={nav || false}
