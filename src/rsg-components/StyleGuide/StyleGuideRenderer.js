@@ -7,7 +7,7 @@ const s = require('./StyleGuide.css');
 function Nav(props) {
 	const { pages, children, toc } = props;
 	const navLinksJsx = pages.map((page, i) => {
-		let addOn = "";
+		let addOn = <ul className={s.menuHide}><li>{toc}</li></ul>;
 		if(document.location.hash.substr(2, document.location.hash.length) === page.id)
 		{
 			addOn = <ul><li>{toc}</li></ul>;
@@ -17,9 +17,6 @@ function Nav(props) {
 			<a href={`#!${page.id}`}>{page.name}</a>
 			{addOn}
 		</li>;
-
-
-
 	return (
 		returnVal
 	);

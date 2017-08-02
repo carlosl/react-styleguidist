@@ -26,6 +26,11 @@
 	overflow: auto;
 }
 
+.menuHide {
+	display: none;
+}
+
+
 .root.hasNav .sidebar {
 	top: 0px;
 }
