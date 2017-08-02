@@ -39,12 +39,8 @@ module.exports = {
 		{
 			id: 'Button',
 			title: 'Button',
-			sections: [
-				{
-					name: 'Buttons',
-					components: './lib/components/Button/**/[A-Z]*.js',
-				},
-			],
+			components: './lib/components/Button/**/[A-Z]*.js',
+
 		},
 	],
 	updateWebpackConfig(webpackConfig) {

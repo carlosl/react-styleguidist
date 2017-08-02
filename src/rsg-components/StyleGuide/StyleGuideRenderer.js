@@ -5,23 +5,38 @@ import cx from 'classnames';
 const s = require('./StyleGuide.css');
 
 function Nav(props) {
-	const { pages, children } = props;
-
+	const { pages, children, toc } = props;
 	const navLinksJsx = pages.map((page, i) => {
-		return (<li key={i}><a href={`#!${page.id}`}>{page.name}</a></li>);
-	});
+		let addOn = "";
+		if(document.location.hash.substr(2, document.location.hash.length) === page.id)
+		{
+			addOn = <ul><li>{toc}</li></ul>;
+		}
+		const returnVal =
+		<li key={i}>
+			<a href={`#!${page.id}`}>{page.name}</a>
+			{addOn}
+		</li>;
+
+
 
 	return (
-		<div>
-			<nav><ul>{navLinksJsx}</ul></nav>
-			{children}
-		</div>
+		returnVal
 	);
+});
+
+return (
+	<div>
+		<nav><ul>{navLinksJsx}</ul></nav>
+		{children}
+	</div>
+);
 }
 
 Nav.propTypes = {
 	pages: PropTypes.array.isRequired,
 	children: PropTypes.node,
+	toc: PropTypes.node.isRequired
 };
 
 const StyleGuideRenderer = ({ title, homepageUrl, components, toc, pages, sidebar, nav }) => (
@@ -37,9 +52,7 @@ const StyleGuideRenderer = ({ title, homepageUrl, components, toc, pages, sideba
 		{sidebar &&
 			<div className={s.sidebar}>
 				<h1 className={s.heading}>{title}</h1>
-				<Nav pages={pages}></Nav>
-				{/* {toc} */}
-
+				<Nav pages={pages} toc={toc}></Nav>
 			</div>
 		}
 	</div>
