@@ -39,7 +39,6 @@
     "codemirror": "5.20.2",
     "common-dir": "^1.0.0",
     "css-loader": "0.25.0",
-    "deepcopy": "^0.6.3",
     "entities": "1.1.1",
     "es6-object-assign": "^1.0.3",
     "express": "4.14.0",
