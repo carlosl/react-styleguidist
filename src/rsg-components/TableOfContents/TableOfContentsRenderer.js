@@ -6,12 +6,12 @@ const TableOfContentsRenderer = ({ items, searchTerm, onSearchTermChange }) => {
 	return (
 		<div>
 			<div className={s.root}>
-				{/* <input
+				{/* { <input
 					value={searchTerm}
 					className={s.search}
 					placeholder="Filter by name"
 					onChange={event => onSearchTermChange(event.target.value)}
-				/> */}
+				/> } */}
 				{items}
 			</div>
 		</div>

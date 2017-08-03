@@ -35,20 +35,25 @@ function searchMenu(){
     let filter, li, a, i;
 	filter = document.getElementsByClassName('myInput')[0].value.toUpperCase();
 	li = document.getElementsByClassName("nav")[0].getElementsByTagName('li');
-
 	for (i = 0; i < li.length; i++)
 	{
-        a = li[i].getElementsByTagName("a")[0];
+		a = li[i].getElementsByTagName("a")[0];
 		if (a.innerHTML.toUpperCase().indexOf(filter) > -1)
 		{
-            li[i].classList.remove(s.menuHide);
+			li[i].classList.remove(s.menuHide);
 		} else
 		{
-            li[i].className += " " + s.menuHide;
-        }
+			li[i].className += " " + s.menuHide;
+		}
 	}
 }
-
+//I plan ot write a recursive funtion to search functions
+function deepSearch(li){
+// if li has more children
+// 	call deepsearch again on children
+// else
+// 	search the current li
+}
 
 Nav.propTypes = {
 	pages: PropTypes.array.isRequired,

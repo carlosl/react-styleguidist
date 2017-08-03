@@ -1,8 +1,28 @@
 import React, { PropTypes } from 'react';
+import Markdown from 'rsg-components/Markdown';
 
 const s = require('./ReactComponent.css');
 
 const ReactComponentRenderer = ({ name, pathLine, description, props, methods, examples, sidebar }) => {
+	//console.log(examples);
+
+	const markdownObject = examples.props.examples;
+	const markDownExample = examples;
+	let markDownGuidelines = '';
+	let guidlines = false;
+
+	for(let i=0; i < markdownObject.length;i++)
+	{
+		if(markdownObject[i].content.substring(3,9) === '#Break')
+		{
+			markDownGuidelines += markdownObject[i].content.substring(9,markdownObject[i].content.length);
+			markDownExample.props.examples[i].content = "";
+		}else
+		{
+			markDownExample.props.examples[i].content = markdownObject[i].content ;
+		}
+	}
+
 	return (
 		<div className={s.root} id={name + '-container'}>
 			<header className={s.header}>
@@ -19,7 +39,7 @@ const ReactComponentRenderer = ({ name, pathLine, description, props, methods, e
 			<div>
 				{description}
 			</div>
-			{examples}
+			{markDownExample}
 			{
 				props && (
 					<div className={s.props}>
@@ -36,6 +56,9 @@ const ReactComponentRenderer = ({ name, pathLine, description, props, methods, e
 					</div>
 				) : false
 			}
+			<Markdown
+				text={markDownGuidelines}
+			/>
 		</div>
 	);
 };
