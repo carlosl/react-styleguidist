@@ -24,11 +24,31 @@ function Nav(props) {
 
 return (
 	<div>
-		<nav><ul>{navLinksJsx}</ul></nav>
+		<nav><input type="text" className="myInput" onKeyUp={searchMenu} placeholder="Filter by Name"/>
+			<ul className="nav">{navLinksJsx}</ul></nav>
 		{children}
 	</div>
 );
 }
+
+function searchMenu(){
+    let filter, li, a, i;
+	filter = document.getElementsByClassName('myInput')[0].value.toUpperCase();
+	li = document.getElementsByClassName("nav")[0].getElementsByTagName('li');
+
+	for (i = 0; i < li.length; i++)
+	{
+        a = li[i].getElementsByTagName("a")[0];
+		if (a.innerHTML.toUpperCase().indexOf(filter) > -1)
+		{
+            li[i].classList.remove(s.menuHide);
+		} else
+		{
+            li[i].className += " " + s.menuHide;
+        }
+	}
+}
+
 
 Nav.propTypes = {
 	pages: PropTypes.array.isRequired,
@@ -42,7 +62,6 @@ const StyleGuideRenderer = ({ title, homepageUrl, components, toc, pages, sideba
 			<div className={s.components}>
 				{components}
 				<footer className={s.footer}>
-					<Markdown text={`Generated with [React Styleguidist](${homepageUrl})`} />
 				</footer>
 			</div>
 		</main>

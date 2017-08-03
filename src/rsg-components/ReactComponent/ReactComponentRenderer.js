@@ -19,6 +19,7 @@ const ReactComponentRenderer = ({ name, pathLine, description, props, methods, e
 			<div>
 				{description}
 			</div>
+			{examples}
 			{
 				props && (
 					<div className={s.props}>
@@ -35,7 +36,6 @@ const ReactComponentRenderer = ({ name, pathLine, description, props, methods, e
 					</div>
 				) : false
 			}
-			{examples}
 		</div>
 	);
 };
