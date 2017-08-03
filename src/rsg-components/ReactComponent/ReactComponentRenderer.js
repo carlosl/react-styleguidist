@@ -1,16 +1,14 @@
 import React, { PropTypes } from 'react';
 import Markdown from 'rsg-components/Markdown';
+var _ = require('lodash');
+
 
 const s = require('./ReactComponent.css');
 
 const ReactComponentRenderer = ({ name, pathLine, description, props, methods, examples, sidebar }) => {
-	//console.log(examples);
-
 	const markdownObject = examples.props.examples;
-	const markDownExample = examples;
+	const markDownExample = _.cloneDeep(examples);
 	let markDownGuidelines = '';
-	let guidlines = false;
-
 	for(let i=0; i < markdownObject.length;i++)
 	{
 		if(markdownObject[i].content.substring(3,9) === '#Break')
