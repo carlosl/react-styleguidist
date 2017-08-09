@@ -1,5 +1,6 @@
 {
   "name": "react-styleguidist",
+  "version": "0.1.0-icims",
   "description": "React components style guide generator",
   "homepage": "https://github.com/styleguidist/react-styleguidist",
   "author": {
