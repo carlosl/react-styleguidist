@@ -7,6 +7,7 @@ const s = require('./StyleGuide.css');
 
 
 function Nav(props) {
+	console.log("Nav")
 	const { pages, children, toc } = props;
 	const navLinksJsx = pages.map((page, i) => {
 		let addOn = <ul className={s.menuHide}><li>{toc}</li></ul>;
@@ -72,7 +73,7 @@ function bold(id)
 }
 
 Nav.propTypes = {
-	pages: PropTypes.array.isRequired,
+	pages: PropTypes.array,
 	children: PropTypes.node,
 	toc: PropTypes.node.isRequired
 };
@@ -98,7 +99,7 @@ const StyleGuideRenderer = ({ title, homepageUrl, components, toc, pages, sideba
 		{sidebar &&
 			<div className={s.sidebar}>
 				<h1 className={s.heading}>{title}</h1>
-				<Nav pages={pages} toc={toc}></Nav>
+				{(pages? <Nav pages={pages} toc={toc}></Nav> : toc ) }
 			</div>
 		}
 	</div>

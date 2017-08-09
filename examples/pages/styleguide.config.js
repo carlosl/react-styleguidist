@@ -42,11 +42,6 @@ module.exports = {
 			components: './lib/components/Button/**/[A-Z]*.js',
 
 		},
-		{
-			id: 'exampleSwitch',
-			title: 'Switch',
-			content: './lib/components/Switch/**/[A-Z]*.js',
-		},
 	],
 	updateWebpackConfig(webpackConfig) {
 		const dir = path.resolve(__dirname, 'lib');

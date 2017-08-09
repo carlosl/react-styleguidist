@@ -31,19 +31,22 @@ function renderStyleguide() {
 	const x = 0;
 	let components_raw = styleguide.components;
 	let sections_raw = styleguide.sections;
+	if(styleguide.pages)
+	{
+		if (styleguide.pages.length > 0) {
+			let selected = 0;
 
-	if (styleguide.pages.length > 0) {
-		let selected = 0;
+			styleguide.pages.map((page, i) => {
+				if (page.id === hash) {
+					selected = i;
+				}
+			});
 
-		styleguide.pages.map((page, i) => {
-			if (page.id === hash) {
-				selected = i;
-			}
-		});
-
-		components_raw = styleguide.pages[selected].components;
-		sections_raw = styleguide.pages[selected].sections;
+			components_raw = styleguide.pages[selected].components;
+			sections_raw = styleguide.pages[selected].sections;
+		}
 	}
+
 
 	let components = processComponents(components_raw);
 	let sections = processSections(sections_raw || []);
@@ -74,7 +77,9 @@ function renderStyleguide() {
 		}
 	}
 
-	/* ReactDOM.render(
+	if(!styleguide.pages)
+	{
+		ReactDOM.render(
 		<StyleGuide
 			codeKey={codeKey}
 			config={styleguide.config}
@@ -84,16 +89,22 @@ function renderStyleguide() {
 			singleExample={singleExample}
 		/>,
 		document.getElementById('app')
-	); */
-
-	ReactDOM.render(
+		);
+	}
+	else
+	{
+		ReactDOM.render(
 		<Pages
 			pages={styleguide.pages}
 			config={styleguide.config}
 			hash={hash}
 		/>,
-		document.getElementById('app')
-	);
+			document.getElementById('app')
+		);
+	}
+
+
+
 }
 
 window.addEventListener('hashchange', ()=>

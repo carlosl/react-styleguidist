@@ -204,7 +204,7 @@ function processSectionsList(sections, config) {
 }
 
 function processPagesList(pages, config) {
-	if (!pages) {
+	if (JSON.stringify(pages) === '{}') {
 		return null;
 	}
 
