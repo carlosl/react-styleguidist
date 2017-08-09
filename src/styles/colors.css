@@ -5,14 +5,17 @@
 .link,
 .link:link,
 .link:visited {
-	color: #1978c8;
+	color: #333333;
 	text-decoration: none;
 }
 
-.link:hover,
-.link:active {
-	color: #f28a25;
+.link:hover{
+
 }
+
+.link:visited{
+}
+
 
 .link-base,
 .link-base:link,

@@ -7,7 +7,7 @@ const s = require('./ReactComponent.css');
 
 const ReactComponentRenderer = ({ name, pathLine, description, props, methods, examples, sidebar }) => {
 	const markdownObject = examples.props.examples;
-	const markDownExample = _.cloneDeep(examples);
+	const markDownExample = _.clone(examples);
 	let markDownGuidelines = '';
 	for(let i=0; i < markdownObject.length;i++)
 	{

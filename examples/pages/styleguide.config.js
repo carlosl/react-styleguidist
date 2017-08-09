@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	title: 'Sample',
+	title: 'v1.0',
 	pages: [
 		{
 			id: 'readme',
@@ -37,10 +37,15 @@ module.exports = {
 			],
 		},
 		{
-			id: 'Button',
+			id: 'exampleBut',
 			title: 'Button',
 			components: './lib/components/Button/**/[A-Z]*.js',
 
+		},
+		{
+			id: 'exampleSwitch',
+			title: 'Switch',
+			content: './lib/components/Switch/**/[A-Z]*.js',
 		},
 	],
 	updateWebpackConfig(webpackConfig) {
